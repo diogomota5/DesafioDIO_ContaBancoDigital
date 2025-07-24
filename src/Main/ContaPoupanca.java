@@ -2,8 +2,12 @@ package Main;
 
 public class ContaPoupanca extends Conta {
 
-	public ContaPoupanca(int agencia, int numeroConta) {
-		super(agencia, numeroConta);
+	public ContaPoupanca(Cliente cliente) {
+		super(cliente);
+	}
+	
+	public ContaPoupanca(Cliente cliente, double valor) {
+		super(cliente, valor);
 	}
 	
 	@Override

@@ -2,9 +2,14 @@ package Main;
 
 public class ContaCorrente extends Conta {
 
-	public ContaCorrente(int agencia, int numeroConta) {
-		super(agencia, numeroConta);
+	public ContaCorrente(Cliente cliente) {
+		super(cliente);
 	}
+	
+	public ContaCorrente(Cliente cliente, double saldo) {
+		super(cliente, saldo);
+	}
+	
 
 	@Override
 	public void imprimirExtrato() {

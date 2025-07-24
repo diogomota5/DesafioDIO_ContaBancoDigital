@@ -2,19 +2,24 @@ package Main;
 
 public abstract class Conta implements iConta {
 
+	private static final int AGENCIA_PADRAO = 1;
+	private static int SEQUENCIAL = 1;
+
 	protected int agencia;
 	protected int numeroConta;
 	protected double saldo;
 	protected Cliente cliente;
 
-	public Conta(int agencia, int numeroConta) {
-		this.agencia = agencia;
-		this.numeroConta = numeroConta;
+	public Conta(Cliente cliente) {
+		this.agencia = Conta.AGENCIA_PADRAO;
+		this.numeroConta = SEQUENCIAL++;
+		this.cliente = cliente;
 	}
 
-	public Conta(int agencia, int numeroConta, double saldo) {
-		this.agencia = agencia;
-		this.numeroConta = numeroConta;
+	public Conta(Cliente cliente, double saldo) {
+		this.agencia = Conta.AGENCIA_PADRAO;
+		this.numeroConta = SEQUENCIAL++;
+		this.cliente = cliente;
 		this.saldo = saldo;
 	}
 
@@ -22,16 +27,8 @@ public abstract class Conta implements iConta {
 		return agencia;
 	}
 
-	public void setAgencia(int agencia) {
-		this.agencia = agencia;
-	}
-
 	public int getNumeroConta() {
 		return numeroConta;
-	}
-
-	public void setNumeroConta(int numeroConta) {
-		this.numeroConta = numeroConta;
 	}
 
 	public double getSaldo() {
@@ -40,10 +37,6 @@ public abstract class Conta implements iConta {
 
 	public Cliente getCliente() {
 		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public void sacar(double valor) {
@@ -75,14 +68,12 @@ public abstract class Conta implements iConta {
 		System.out.println("Agência: " + getAgencia());
 		System.out.println("Conta: " + getNumeroConta());
 		System.out.println("Saldo disponível: " + getSaldo());
-		System.out.println("Cliente: " + getCliente());
+		System.out.println(getCliente());
 	}
 
 	@Override
 	public String toString() {
-		return "Agência: " + getAgencia() 
-				   + "\nConta: " + getNumeroConta() 
-				   + "\nCliente " + getCliente();
+		return "Agência: " + getAgencia() + "\nConta: " + getNumeroConta() + "\n" + getCliente() + "\nSaldo: " + getSaldo();
 	}
 
 }
