@@ -46,34 +46,16 @@ public abstract class Conta implements iConta {
 			System.out.println("Saldo insuficiente para saque");
 		} else {
 			this.saldo = getSaldo() - valor;
+			System.out.println("Saque realizado com sucesso");
 		}
 	}
 
 	public void depositar(double valor) {
-		this.saldo = getSaldo() + valor;
-	}
-
-	public void transferir(double valor, iConta contaDestino) {
-		if (getSaldo() <= 0) {
-			System.out.println("Seu saldo está zerado e/ou negativo");
-		} else if (getSaldo() < valor) {
-			System.out.println("Saldo insuficiente para transferência");
+		if (valor <= 0) {
+			System.out.println("O valor informado deve ser maior que 0");
 		} else {
-			this.sacar(valor);
-			contaDestino.depositar(valor);
+			this.saldo = getSaldo() + valor;
+			System.out.println("Deposito realizado com sucesso");
 		}
 	}
-
-	public void imprimirExtrato() {
-		System.out.println("Agência: " + getAgencia());
-		System.out.println("Conta: " + getNumeroConta());
-		System.out.println("Saldo disponível: " + getSaldo());
-		System.out.println(getCliente());
-	}
-
-	@Override
-	public String toString() {
-		return "Agência: " + getAgencia() + "\nConta: " + getNumeroConta() + "\n" + getCliente() + "\nSaldo: " + getSaldo();
-	}
-
 }

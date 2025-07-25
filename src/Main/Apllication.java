@@ -60,17 +60,16 @@ public class Apllication {
 						if (resposta == 'S') {
 							System.out.println("Informe o valor do depósito: ");
 							double valorDeposito = sc.nextDouble();
-							Conta conta = new ContaCorrente(new Cliente(nome), valorDeposito);
+							Conta conta = new ContaPoupanca(new Cliente(nome), valorDeposito);
 							contas.add(conta);
 							System.out.println("\nConta Poupança criada com sucesso: \n" + conta);
 						} else if (resposta == 'N') {
-							Conta conta = new ContaCorrente(new Cliente(nome));
+							Conta conta = new ContaPoupanca(new Cliente(nome));
 							contas.add(conta);
 							System.out.println("\nConta Poupança criada com sucesso: \n" + conta);
 						}
 					}
 					break;
-
 				case 2:
 					System.out.println("As contas cadastradas são: ");
 					for (Conta conta : contas) {
@@ -78,12 +77,57 @@ public class Apllication {
 					}
 					break;
 				case 3:
+					System.out.println("Informe o número da conta que deseja realizar o depósito: ");
+					int numeroConta = sc.nextInt();
+					for (Conta conta : contas) {
+						if (numeroConta == conta.getNumeroConta()) {
+							System.out.println("Qual valor deseja depositar ?");
+							double deposito = sc.nextDouble();
+							conta.depositar(deposito);
+							System.out.println(conta);
+						}
+					}
 					break;
 				case 4:
+					System.out.println("Informe o número da conta que deseja realizar o saque: ");
+					numeroConta = sc.nextInt();
+					for (Conta conta : contas) {
+						if (numeroConta == conta.getNumeroConta()) {
+							System.out.println("Qual valor deseja sacar ?");
+							double saque = sc.nextDouble();
+							conta.sacar(saque);
+							System.out.println(conta);
+						}
+					}
 					break;
 				case 5:
+					System.out.println("Informe o número da conta que deseja realizar o saque para transferência: ");
+					numeroConta = sc.nextInt();
+					System.out.println("Informe o número da conta que deseja realizar o deposito: ");
+					int numeroConta2 = sc.nextInt();
+					System.out.println("Qual valor deseja transferir?");
+					double transferencia = sc.nextDouble();
+					for (Conta conta : contas) {
+						if (numeroConta == conta.getNumeroConta()) {
+							conta.sacar(transferencia);
+							conta.imprimirExtrato();
+						}
+					}
+					for (Conta conta : contas) {
+						if (numeroConta2 == conta.getNumeroConta()) {
+							conta.depositar(transferencia);
+							conta.imprimirExtrato();
+						}
+					}
 					break;
 				case 6:
+					System.out.println("Informe o número da conta que deseja emitir o extrato: ");
+					numeroConta = sc.nextInt();
+					for (Conta conta : contas) {
+						if (numeroConta == conta.getNumeroConta()) {
+							conta.imprimirExtrato();
+						}
+					}
 					break;
 				case 7:
 					System.exit(0);
@@ -94,7 +138,5 @@ public class Apllication {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
